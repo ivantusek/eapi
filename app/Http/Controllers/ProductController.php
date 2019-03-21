@@ -112,4 +112,11 @@ class ProductController extends Controller
         $product->delete();
         return response(null,Response::HTTP_NO_CONTENT);
     }
+
+    public function ProductUserCheck($product)
+    {
+        if (Auth::id() !== $product->user_id) {
+            throw new ProductNotBelongsToUser;
+        }
+    }
 }
